@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "coap-dtls": "git+https://github.com/hypfer/node-coap-dtls.git"
+  }
+}
