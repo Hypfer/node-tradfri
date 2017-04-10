@@ -65,8 +65,34 @@ function getDeviceInfo(devid, callback){
 
 
 //run all
-getAllDevices(console.log);
-getDeviceInfo(65537, console.log);
+//getAllDevices(console.log);
+//getDeviceInfo(65537, console.log);
+
+
+//Since the first Device ID Starts at 65536 it is reasonable to assume that all the lower IDs could possibly be commands
+var i = 0;
+var valid = [];
+function scan() {
+    if(i < 65536) {
+        doRequest(i, function(response){
+            if(response.payload.toString()!== "Not Found") {
+                console.log(i,response.payload.toString());
+                valid.push({id: i, response: response.payload.toString()});
+            }
+            i++;
+            scan();
+        });
+    } else {
+        console.dir(valid);
+    }
+}
+scan();
+
+
+/*
+doRequest("15002", function(response){
+    console.log(response.payload.toString(), response.payload.toString() == "Not Found")
+});*/
 
 
 
@@ -80,7 +106,7 @@ getDeviceInfo(65537, console.log);
 
 var lastRequest = new Date();
 function doRequest(command,callback){
-    //Quick & Dirty hack
+    //Quick & Dirty hack to avoid dropping packages
     if (new Date() - lastRequest < 500) {
         setTimeout(function(){
             doRequest(command,callback)
