@@ -1,10 +1,10 @@
-#Ikea Tradfri + node.js
+# Ikea Tradfri + node.js
 
 For reasons unknown to mankind requests never end and I have no idea how to close them.
 <a href="https://github.com/Hypfer/node-coap-dtls">Take a look at the library I'm using if you want to fix that.</a>
 
 ___
-##Getting started
+## Getting started
 You will need
 - Linux
 - a recent version of nodejs
